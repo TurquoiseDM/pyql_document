@@ -12,24 +12,24 @@ layout:
     visible: true
 ---
 
-# API文档
+# API Document
 
-## 数值属性获取
+## Acquire quantity properties
 
 ### add\_quantity(entity, prop, tag,time=False, unit=False)
 
-获取数值属性的值
+This function is used to cquire the value of a quantity property.
 
 #### Parameters:
 
-* entity(str): 实体
-* prop(str): 数值属性
-* tag(str): 标识符，用于给变量命名，最终这个数值属性的属性值的变量就是tag
-* year(int/boolean/str): 时间限制。
-  * int: 年份
-  * boolean: True表示需要获取时间，False表示不获取时间
-  * str: 用to\_date函数获得的完整年月日
-* unit(boolean): 单位转换。True表示要转换，False表示不转换。转换后的变量是si\_value\_tag和si\_unit\_tag
+* entity(str): the entity
+* prop(str): the quantity property you need to get
+* tag(str):  An identifier used to name variables. Ultimately the variable with the property value of this quantity property is the tag.
+* time(int/boolean/str): The constraint of time.
+  * int: Limit the time to this year.
+  * boolean: True means need to acquire the time，False means not need to acquire the time.
+  * str: use the function to\_date to set the entire yyyy-mm-dd
+* unit(boolean): Whether to convert the unit. True for yes. False for no. The converted unit is si\_value\_tag and si\_unit\_tag.
 
 ### add\_quantity\_by\_qualifier(self,entity,main\_prop,main\_obj,qualifier\_prop,tag,unit=False)
 

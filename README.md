@@ -1,7 +1,7 @@
 ---
-description: 这是PyQL文档
+description: This is a document of PyQL
 ---
 
-# PyQL文档
+# PyQL Document
 
-PyQL不是pyql
+PyQL
