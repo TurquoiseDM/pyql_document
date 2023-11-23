@@ -61,37 +61,23 @@ For example, the computer performance of Nvidia GeForce RTX 3090 has 4 statement
 * tag(str): An identifier used to name variables. Ultimately the variable with the property value of this quantity property is the tag.
 * unit(boolean): Whether to convert the unit. True for yes. False for no. The converted unit is si\_value\_tag and si\_unit\_tag.
 
-### add\_quantity\_by\_qualifier\_answer(self, entity, main\_prop, main\_obj, qualifier\_prop, tag, unit=False)
-
-answer版本的add\_quantity\_by\_qualifier，当数值属性的取值要作为答案的时候，指定他为答案，作为最后一条命令使用
-
-### add\_quantity\_with\_qualifier\_answer(self, entity, main\_prop, qualifier\_prop, qualifier\_obj, tag, unit=False)
-
-answer版本的add\_quantity\_with\_qualifier，当数值属性的取值要作为答案的时候，指定他为答案，作为最后一条命令使用
-
-### add\_quantity\_answer(self,entity, prop, tag,time=False, unit=False)
-
-answer版本的add\_quantity，当数值属性的取值要作为答案的时候，指定他为答案，作为最后一条命令使用
-
 ### add\_avg(self,avg\_var, new\_var, group\_obj=None)
 
-计算avg\_var变量的平均值 ,new\_var是最终avg代表的变量的名字
+calculate the average value of variable avg\_var. The parameter new\_var is the variable of the calculated average value.
 
-#### Parameters:
-
-* avg\_var(str): 需要做平均的变量
-* new\_var(str): 平均结果的变量
-* group\_obj(str): 需要做group by的变量
+* avg\_var(str): the variable which needs to be averaged
+* new\_var(str): the variable of the calculated average value
+* group\_obj(str): the variable which needs to be put in a group by
 
 ### add\_sum(self,sum\_var, new\_var, group\_obj=None)
 
-计算sum\_var变量的和 ,new\_var是最终sum代表的变量的名字
+calculate the sum of the variable sum\_var. The parameter new\_var is the variable of the calculated sum value.
 
 #### Parameters:
 
-* sum\_var(str): 需要做平均的变量
-* new\_var(str): 平均结果的变量
-* group\_obj(str): 需要做group by的变量
+* sum\_var(str): the variable which needs to be summed
+* new\_var(str): the variable of the calculated sum value
+* group\_obj(str): the variable which needs to be put in a group by
 
 ### add\_count(self,count\_obj,new\_var, group\_obj=None)
 
@@ -152,10 +138,6 @@ obj1和obj2是否满足op表示的大小关系，只能用在最外层查询的�
 #### Parameters:
 
 * sub\_query: 需要添加为子问题的PyQL对象
-
-### \_\_set\_answer(self,answer)
-
-指定SPARQL最终返回的变量
 
 #### Parameters:
 
