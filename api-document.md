@@ -161,11 +161,13 @@ Determine whether obj1 and obj2 satisfies the size relationship represented by o
 * op(str): operator
 * obj2(str): comparison variable 2
 
-
-
 ## Arithmetic
 
+These functions are used alone. They do not belong to an PyQL instance.
+
 #### add
+
+aaa
 
 #### sub
 
