@@ -1,7 +1,3 @@
----
-description: This is a document of PyQL
----
+# Introduction of PyQL
 
-# PyQL Document
-
-PyQL (Pythonic Query Language for SPARQL), a logical form written in Python as a reasoning step representation for NRQ. PyQL encapsulates various SPARQL syntax ele- ments, such as Basic Graph Patterns, Assignments, Filters, Aggregations, and Subqueries.
+PyQL (Pythonic Query Language for SPARQL), a logical form written in Python as a reasoning step representation for NRQ. A PyQL is a sequence of commands: {c1, c2, ..., cn}, where ci either initializes a PyQL object or calls a function on the object. As shown in the top left of Figure 2, the user should first initialize a PyQL object and sequentially add functions to construct the whole query. Each function represents a reasoning step such as stating the relation between two entities or computing the average. A valid PyQL can directly generate an executable SPARQL query. In detail, PyQL encapsulates various SPARQL syntax elements, such as Basic Graph Patterns, Assignments, Filters, Aggregations, and Subqueries.

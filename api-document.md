@@ -6,6 +6,33 @@
 
 Add a \<s, prefix: p, o> triple to the query.
 
+**Parameters:**
+
+* s(str): the subject of the triple&#x20;
+* p(str): the predicate of the triple
+* o(str): the object of the triple
+* p\_prefix(str): the prefix of predicate
+
+**example:**
+
+* Question: What is the manufacturer of 2T Stalker
+* Program:
+
+```python
+a=PyQL()
+a.add_fact('Q222823', 'P176', 'x0' ,'wdt')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT * {
+	wd:Q222823 wdt:P176 ?x0.
+}
+```
+
+
+
 #### add\_quantity(entity, prop, tag,time=False)
 
 This function is used to acquire the value of a quantity property.
@@ -19,6 +46,30 @@ This function is used to acquire the value of a quantity property.
   * int: Limit the time to this year.
   * boolean: True means need to acquire the time，False means not need to acquire the time.
   * str: use the function to\_date to set the entire yyyy-mm-dd
+
+**example:**
+
+* Question: What is the GDP of French economy in the year 2007
+* Program:
+
+```python
+a=PyQL()
+a.add_quantity('Q8057','P4010','x6',2007)
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x6 {
+	wd:Q8057 p:P4010 ?statement_x6.
+	?statement_x6 psv:P4010 ?value_st_x6.
+	?value_st_x6 wikibase:quantityAmount ?x6.
+	?statement_x6 pq:P585 ?time_x6.
+	FILTER(YEAR(?time_x6) = 2007).
+}
+```
+
+
 
 #### add\_quantity\_by\_qualifier(self,entity,main\_prop,main\_obj,qualifier\_prop,tag)
 

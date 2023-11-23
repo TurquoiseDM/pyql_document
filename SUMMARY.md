@@ -1,7 +1,6 @@
 # Table of contents
 
-* [PyQL Document](README.md)
-* [Introduction of PyQL](introduction-of-pyql.md)
+* [Introduction of PyQL](README.md)
 * [Quick Start](quick-start.md)
 * [More examples](more-examples.md)
 * [API Document](api-document.md)
