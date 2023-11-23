@@ -1,26 +1,16 @@
----
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: false
-  pagination:
-    visible: true
----
-
 # API Document
 
-## Acquire quantity properties
+## Basic graph pattern
 
-### add\_quantity(entity, prop, tag,time=False, unit=False)
+#### **add\_fact**
+
+###
+
+#### add\_quantity(entity, prop, tag,time=False, unit=False)
 
 This function is used to cquire the value of a quantity property.
 
-#### Parameters:
+**Parameters:**
 
 * entity(str): the entity
 * prop(str): the quantity property you need to get
@@ -31,13 +21,13 @@ This function is used to cquire the value of a quantity property.
   * str: use the function to\_date to set the entire yyyy-mm-dd
 * unit(boolean): Whether to convert the unit. True for yes. False for no. The converted unit is si\_value\_tag and si\_unit\_tag.
 
-### add\_quantity\_by\_qualifier(self,entity,main\_prop,main\_obj,qualifier\_prop,tag,unit=False)
+#### add\_quantity\_by\_qualifier(self,entity,main\_prop,main\_obj,qualifier\_prop,tag,unit=False)
 
 Acquire the value of a quantity property which acts as a qualifier.
 
 For example, the entity iPhone 12 has a property 'made from material' of which the value can be steel, glass and so on. The property mass is the qualifier for each material.&#x20;
 
-#### Parameters:
+**Parameters:**
 
 * entity(str):  the entity, such as iPhone12
 * main\_prop(str): the property of the statement, such as made from material
@@ -46,13 +36,13 @@ For example, the entity iPhone 12 has a property 'made from material' of which t
 * tag(str): An identifier used to name variables. Ultimately the variable with the property value of this quantity property is the tag.
 * unit(boolean): Whether to convert the unit. True for yes. False for no. The converted unit is si\_value\_tag and si\_unit\_tag.
 
-### add\_quantity\_with\_qualifier(self,entity,main\_prop,qualifier\_prop,qualifier\_obj,tag,unit=False)
+#### add\_quantity\_with\_qualifier(self,entity,main\_prop,qualifier\_prop,qualifier\_obj,tag,unit=False)
 
 Acquire the value of a quantity property with a qualifire limiting other peoperties&#x20;
 
 For example, the computer performance of Nvidia GeForce RTX 3090 has 4 statements which are limited by the qualifier uses. Their qualifier values are single-precision floating-point format, half-precision floating-point format, double-precision floating-point format and half-precision floating-point format seperately.
 
-#### Parameters:
+**Parameters:**
 
 * entity(str): the entity, such as Nvidia GeForce RTX 3090
 * main\_prop(str): the quantity property of the statement, such as computer performance
@@ -61,15 +51,59 @@ For example, the computer performance of Nvidia GeForce RTX 3090 has 4 statement
 * tag(str): An identifier used to name variables. Ultimately the variable with the property value of this quantity property is the tag.
 * unit(boolean): Whether to convert the unit. True for yes. False for no. The converted unit is si\_value\_tag and si\_unit\_tag.
 
-### add\_avg(self,avg\_var, new\_var, group\_obj=None)
+#### add\_type\_constrain
+
+
+
+#### add\_filter
+
+
+
+#### add\_bind
+
+
+
+#### add\_assignment
+
+
+
+####
+
+## Aggreggation
+
+#### add\_max(self, max\_obj, return\_obj='\*',offset=0,limit=1)
+
+Calculate the maximum value of max\_obj
+
+**Parameters:**
+
+* max\_obj(str): the variable of which the maximum value needs to be counted
+* return\_obj(str): the variable to return. It can be \*
+* offset(str): the number in offset. For example, to get the second biggest one, set offset=2
+* limit(str): the number in limit. For example, to get the three biggest one, set limit=3, offset=0
+
+#### add\_min(self, min\_obj, return\_obj='\*',offset=0,limit=1)
+
+Calculate the minimum value of min\_obj
+
+**Parameters:**
+
+* max\_obj(str): the variable of which the minimum value needs to be counted
+* return\_obj(str): the variable to return. It can be \*
+* offset(str): the number in offset. For example, to get the second smallest one, set offset=2
+* limit(str): the number in limit. For example, to get the three smallest one, set limit=3, offset=0
+
+#### add\_avg(self,avg\_var, new\_var, group\_obj=None)
 
 calculate the average value of variable avg\_var. The parameter new\_var is the variable of the calculated average value.
+
+**Parameters:**
 
 * avg\_var(str): the variable which needs to be averaged
 * new\_var(str): the variable of the calculated average value
 * group\_obj(str): the variable which needs to be put in a group by
 
-### add\_sum(self,sum\_var, new\_var, group\_obj=None)
+#### add\_sum(self,sum\_var, new\_var, group\_obj=None)
 
 calculate the sum of the variable sum\_var. The parameter new\_var is the variable of the calculated sum value.
 
@@ -79,69 +113,73 @@ calculate the sum of the variable sum\_var. The parameter new\_var is the variab
 * new\_var(str): the variable of the calculated sum value
 * group\_obj(str): the variable which needs to be put in a group by
 
-### add\_count(self,count\_obj,new\_var, group\_obj=None)
+#### add\_count(self,count\_obj,new\_var, group\_obj=None)
 
 calculate the average value of variable count\_obj. The parameter new\_var is the variable of the calculated average value. It can only be used in the final step of a complete query or subquery. After use, either the entire query ends or it is treated as a subquery.&#x20;
 
-#### Parameters:
+**Parameters:**
 
 * count\_obj(str): the variable which needs to be counted
 * new\_var(str): the variable of the calculated counting value
 * group\_obj(str): the variable which needs to be put in a group by
 
-### add\_rank(self, rank\_var, var\_list,new\_var)
+#### add\_rank(self, rank\_var, var\_list,new\_var)
 
 calculate the rank of rank\_var's value among var\_list
 
-#### Parameters:
+**Parameters:**
 
 * rank\_var(str): the variable of which the rank needs to be calculated
 * var\_list(str): the rank is calculated in this list which includes rank\_var
 * new\_var(str): the variable of the rank result
 
-### add\_max(self, max\_obj, return\_obj='\*',offset=0,limit=1)
+## Boolean
 
-Calculate the maximum value of max\_obj
-
-#### Parameters:
-
-* max\_obj(str): the variable of which the maximum value needs to be counted
-* return\_obj(str): the variable to return. It can be \*
-* offset(str): the number in offset. For example, to get the second biggest one, set offset=2
-* limit(str): the number in limit. For example, to get the three biggest one, set limit=3, offset=0
-
-### add\_min(self, min\_obj, return\_obj='\*',offset=0,limit=1)
-
-Calculate the minimum value of min\_obj
-
-#### Parameters:
-
-* max\_obj(str): the variable of which the minimum value needs to be counted
-* return\_obj(str): the variable to return. It can be \*
-* offset(str): the number in offset. For example, to get the second smallest one, set offset=2
-* limit(str): the number in limit. For example, to get the three smallest one, set limit=3, offset=0
-
-### add\_compare(self, obj1, op, obj2)
+#### add\_compare(self, obj1, op, obj2)
 
 Determine whether obj1 and obj2 satisfies the size relationship represented by op. It can only be used in the final step of a complete query.
 
-#### Parameters:
+**Parameters:**
 
 * obj1(str): comparison variable 1
 * op(str): operator
 * obj2(str): comparison variable 2
 
-### add\_sub\_query(self,\*sub\_query)
+#### add\_end\_time(self, entity, new\_var)
+
+
+
+## Arithmetic
+
+#### add
+
+#### sub
+
+#### mul
+
+#### div
+
+#### abs
+
+
+
+## Other
+
+#### add\_sub\_query(self,\*sub\_query)
 
 add a sub query
 
-#### Parameters:
+**Parameters:**
 
 * sub\_query: the PyQL instance which needs to be added as a sub\_query
 
-### add\_end\_time(self, entity, new\_var)
 
 
+#### add\_time
+
+#### add\_start\_time
+
+#### add\_end\_time
 
 
 
