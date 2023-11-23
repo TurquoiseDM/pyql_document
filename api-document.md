@@ -161,41 +161,64 @@ Determine whether obj1 and obj2 satisfies the size relationship represented by o
 * op(str): operator
 * obj2(str): comparison variable 2
 
-## Arithmetic
-
-These functions are used alone. They do not belong to an PyQL instance.
-
-#### add
-
-aaa
-
-#### sub
-
-#### mul
-
-#### div
-
-#### abs
-
-
-
 ## Other
 
 #### add\_sub\_query(self,\*sub\_query)
 
-add a sub query
+add a sub query to the sparql of this PyQL instance
 
 **Parameters:**
 
-* sub\_query: the PyQL instance which needs to be added as a sub\_query
+* sub\_query(PyQL): the PyQL instance which needs to be added as a sub\_query
 
+#### add\_time(self, entity, new\_var)
 
+Get the point of time property of entity. It adds a triple \<entity, wdt:P585, new\_var>
 
-#### add\_time
+**Parameters:**
+
+* entity(str): The entity whose point of time is needed.
+* new\_var(str): The variable which represents the point of time value of the entity
 
 #### add\_start\_time
 
+Get the start time property of entity. It adds a triple \<entity, wdt:P580, new\_var>
+
+**Parameters:**
+
+* entity(str): The entity whose start time is needed.
+* new\_var(str): The variable which represents the start time value of the entity
+
 #### add\_end\_time
 
+Get the end time property of entity. It adds a triple \<entity, wdt:P582, new\_var>
 
+**Parameters:**
+
+* entity(str): The entity whose end time is needed.
+* new\_var(str): The variable which represents the end time value of the entity
+
+## Arithmetic
+
+These functions are used alone. They do not belong to an PyQL instance.
+
+#### add(\*para\_list)
+
+It creates an addition expression which adds up every element in para\_list.
+
+#### sub(para1, para2)
+
+It creates an subtraction expression of para1 subtacting para2.
+
+#### mul(\*para\_list)
+
+It creates an multiplication expression which multiplies every element in para\_list.
+
+#### div(para1, para2)
+
+It creates an division expression of para1 dividing para2.
+
+#### abs(para)
+
+It creates an expression which is abs(para)
 
