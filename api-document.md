@@ -48,18 +48,18 @@ For example, the entity iPhone 12 has a property 'made from material' of which t
 
 ### add\_quantity\_with\_qualifier(self,entity,main\_prop,qualifier\_prop,qualifier\_obj,tag,unit=False)
 
-获取数值属性值，但是有qualifier约束其他属性
+Acquire the value of a quantity property with a qualifire limiting other peoperties&#x20;
 
-例如3090的性能，有三个数值记录，分别被（应用场景：单精度），（应用场景：半精度），（应用场景：双精度），修饰。
+For example, the computer performance of Nvidia GeForce RTX 3090 has 4 statements which are limited by the qualifier uses. Their qualifier values are single-precision floating-point format, half-precision floating-point format, double-precision floating-point format and half-precision floating-point format seperately.
 
 #### Parameters:
 
-* entity(str): 实体 例如3090
-* main\_prop(str): statement的属性,主属性,这里是数值属性，例如性能
-* qualifier\_prop(str): qualifier属性，例如应用场景 applies to part
-* qualifier\_obj(str): qualifier属性的取值，例如单精度，半精度，双精度
-* tag(str): 标识符，用于给变量命名，最终这个数值属性的属性值的变量就是tag
-* unit(boolean): 单位转换。True表示要转换，False表示不转换。转换后的变量是si\_value\_tag和si\_unit\_tag
+* entity(str): the entity, such as Nvidia GeForce RTX 3090
+* main\_prop(str): the quantity property of the statement, such as computer performance
+* qualifier\_prop(str): the property which acts as a qualifier, such as uses
+* qualifier\_obj(str): the value of qualifier property, such as single-precision floating-point format.
+* tag(str): An identifier used to name variables. Ultimately the variable with the property value of this quantity property is the tag.
+* unit(boolean): Whether to convert the unit. True for yes. False for no. The converted unit is si\_value\_tag and si\_unit\_tag.
 
 ### add\_quantity\_by\_qualifier\_answer(self, entity, main\_prop, main\_obj, qualifier\_prop, tag, unit=False)
 
