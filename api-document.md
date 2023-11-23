@@ -2,13 +2,13 @@
 
 ## Basic graph pattern
 
-#### **add\_fact**
+#### add\_fact(self, s, p, o, p\_prefix)
 
-###
+Add a \<s, prefix: p, o> triple to the query.
 
-#### add\_quantity(entity, prop, tag,time=False, unit=False)
+#### add\_quantity(entity, prop, tag,time=False)
 
-This function is used to cquire the value of a quantity property.
+This function is used to acquire the value of a quantity property.
 
 **Parameters:**
 
@@ -19,9 +19,8 @@ This function is used to cquire the value of a quantity property.
   * int: Limit the time to this year.
   * boolean: True means need to acquire the time，False means not need to acquire the time.
   * str: use the function to\_date to set the entire yyyy-mm-dd
-* unit(boolean): Whether to convert the unit. True for yes. False for no. The converted unit is si\_value\_tag and si\_unit\_tag.
 
-#### add\_quantity\_by\_qualifier(self,entity,main\_prop,main\_obj,qualifier\_prop,tag,unit=False)
+#### add\_quantity\_by\_qualifier(self,entity,main\_prop,main\_obj,qualifier\_prop,tag)
 
 Acquire the value of a quantity property which acts as a qualifier.
 
@@ -34,9 +33,8 @@ For example, the entity iPhone 12 has a property 'made from material' of which t
 * main\_obj(str): the value of the main\_prop, such as steel.
 * qualifier\_prop(str): the quantity property which acts as a qualifier. For example, mass.
 * tag(str): An identifier used to name variables. Ultimately the variable with the property value of this quantity property is the tag.
-* unit(boolean): Whether to convert the unit. True for yes. False for no. The converted unit is si\_value\_tag and si\_unit\_tag.
 
-#### add\_quantity\_with\_qualifier(self,entity,main\_prop,qualifier\_prop,qualifier\_obj,tag,unit=False)
+#### add\_quantity\_with\_qualifier(self,entity,main\_prop,qualifier\_prop,qualifier\_obj,tag)
 
 Acquire the value of a quantity property with a qualifire limiting other peoperties&#x20;
 
@@ -49,25 +47,43 @@ For example, the computer performance of Nvidia GeForce RTX 3090 has 4 statement
 * qualifier\_prop(str): the property which acts as a qualifier, such as uses
 * qualifier\_obj(str): the value of qualifier property, such as single-precision floating-point format.
 * tag(str): An identifier used to name variables. Ultimately the variable with the property value of this quantity property is the tag.
-* unit(boolean): Whether to convert the unit. True for yes. False for no. The converted unit is si\_value\_tag and si\_unit\_tag.
 
-#### add\_type\_constrain
+#### add\_type\_constrain(self, type\_id, new\_var)
 
+add a type constraint to a variable
 
+**Parameters:**
 
-#### add\_filter
+* type\_id(str): ID of the type
+* new\_var(str): the entity to be constrained
 
+#### add\_filter(self, compare\_obj1, operator, compare\_obj2)
 
+Given two comarison variables and an operator, add a filter.
 
-#### add\_bind
+**Parameters:**
 
+* compare\_obj1(str): comparison variable 1
+* operator(str): operator
+* compare\_obj2(str): comparison variable 2
 
+#### add\_bind(self, equation, var\_name)
 
-#### add\_assignment
+add a bind expression to assign the result of the expression equation to the variable var\_name.
 
+**Parameters:**
 
+* equation(str): The expression to be binded. Bracket is not necessary. It will be added automatically.
+* var\_name(str): The expression will be assigned to this variable.
 
-####
+#### add\_assignment(self,var\_list,new\_var)
+
+add a values clause to generate a new variable new var of which the value includes all entities in var\_list.
+
+**Parameters:**
+
+* equation(list): an entities list, such as \['Q123', 'Q186']
+* new\_var(str): the new variable
 
 ## Aggreggation
 
@@ -144,8 +160,6 @@ Determine whether obj1 and obj2 satisfies the size relationship represented by o
 * obj1(str): comparison variable 1
 * op(str): operator
 * obj2(str): comparison variable 2
-
-#### add\_end\_time(self, entity, new\_var)
 
 
 
