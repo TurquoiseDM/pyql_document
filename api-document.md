@@ -81,67 +81,63 @@ calculate the sum of the variable sum\_var. The parameter new\_var is the variab
 
 ### add\_count(self,count\_obj,new\_var, group\_obj=None)
 
-计算count\_obj的数量，只能在完整查询或者子查询最后一步使用，使用后要么整个查询结束，要么作为一个子查询。
+calculate the average value of variable count\_obj. The parameter new\_var is the variable of the calculated average value. It can only be used in the final step of a complete query or subquery. After use, either the entire query ends or it is treated as a subquery.&#x20;
 
 #### Parameters:
 
-* count\_obj(str): 需要做计数的变量
-* new\_var(str): 计数结果的变量
-* group\_obj(str): 需要做group by的变量
+* count\_obj(str): the variable which needs to be counted
+* new\_var(str): the variable of the calculated counting value
+* group\_obj(str): the variable which needs to be put in a group by
 
 ### add\_rank(self, rank\_var, var\_list,new\_var)
 
-计算rank\_var的数值在var\_list中的排名
+calculate the rank of rank\_var's value among var\_list
 
 #### Parameters:
 
-* rank\_var(str): 需要计算排名的变量
-* var\_list(str): 在这个变量列表中计算排名，包含rank\_var
-* new\_var(str): 排名结果的变量
+* rank\_var(str): the variable of which the rank needs to be calculated
+* var\_list(str): the rank is calculated in this list which includes rank\_var
+* new\_var(str): the variable of the rank result
 
 ### add\_max(self, max\_obj, return\_obj='\*',offset=0,limit=1)
 
-计算max\_obj的最大值
+Calculate the maximum value of max\_obj
 
 #### Parameters:
 
-* max\_obj(str): 需要计算最大值的变量
-* return\_obj(str): 需要返回的变量，可以是\*
-* offset(str): 排名第几，例如第二大的，offset=2
-* limit(str):从最大的第几个开始返回，例如前三大的，limit=3,offset=0
+* max\_obj(str): the variable of which the maximum value needs to be counted
+* return\_obj(str): the variable to return. It can be \*
+* offset(str): the number in offset. For example, to get the second biggest one, set offset=2
+* limit(str): the number in limit. For example, to get the three biggest one, set limit=3, offset=0
 
 ### add\_min(self, min\_obj, return\_obj='\*',offset=0,limit=1)
 
-计算min\_obj的最小值
+Calculate the minimum value of min\_obj
 
 #### Parameters:
 
-* max\_obj(str): 需要计算最小值的变量
-* return\_obj(str): 需要返回的变量，可以是\*
-* offset(str): 排名第几，例如第二小的，offset=2
-* limit(str):从最小的第几个开始返回，例如前三小的，limit=3,offset=0
+* max\_obj(str): the variable of which the minimum value needs to be counted
+* return\_obj(str): the variable to return. It can be \*
+* offset(str): the number in offset. For example, to get the second smallest one, set offset=2
+* limit(str): the number in limit. For example, to get the three smallest one, set limit=3, offset=0
 
 ### add\_compare(self, obj1, op, obj2)
 
-obj1和obj2是否满足op表示的大小关系，只能用在最外层查询的最后一步
+Determine whether obj1 and obj2 satisfies the size relationship represented by op. It can only be used in the final step of a complete query.
 
 #### Parameters:
 
-* obj1(str): 比较对象1
-* op(str): 运算符
-* obj2(str): 比较对象2
+* obj1(str): comparison variable 1
+* op(str): operator
+* obj2(str): comparison variable 2
 
 ### add\_sub\_query(self,\*sub\_query)
 
-添加子查询
+add a sub query
 
 #### Parameters:
 
-* sub\_query: 需要添加为子问题的PyQL对象
-
-#### Parameters:
-
-* answer(str): 需要返回的变量
+* sub\_query: the PyQL instance which needs to be added as a sub\_query
 
 ### add\_end\_time(self, entity, new\_var)
 
