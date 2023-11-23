@@ -33,18 +33,18 @@ This function is used to cquire the value of a quantity property.
 
 ### add\_quantity\_by\_qualifier(self,entity,main\_prop,main\_obj,qualifier\_prop,tag,unit=False)
 
-获取数值属性的值，这个数值属性是以qualifier形式存在的。
+Acquire the value of a quantity property which acts as a qualifier.
 
-例如iPhone 12的made from material有不锈钢，玻璃，mass（数值属性）作为每种材料的的qualifier。
+For example, the entity iPhone 12 has a property 'made from material' of which the value can be steel, glass and so on. The property mass is the qualifier for each material.&#x20;
 
 #### Parameters:
 
-* entity(str): 实体，例如iPhone12
-* main\_prop(str): statement的属性,主属性，例如材料，made from material
-* main\_obj(str): 主属性的取值，main value，例如不锈钢
-* qualifier\_prop(str): 做qualifier的属性,这里是数值属性，例如质量
-* tag(str): 标识符，用于给变量命名，最终这个数值属性的属性值的变量就是tag
-* unit(boolean): 单位转换。True表示要转换，False表示不转换。转换后的变量是si\_value\_tag和si\_unit\_tag
+* entity(str):  the entity, such as iPhone12
+* main\_prop(str): the property of the statement, such as made from material
+* main\_obj(str): the value of the main\_prop, such as steel.
+* qualifier\_prop(str): the quantity property which acts as a qualifier. For example, mass.
+* tag(str): An identifier used to name variables. Ultimately the variable with the property value of this quantity property is the tag.
+* unit(boolean): Whether to convert the unit. True for yes. False for no. The converted unit is si\_value\_tag and si\_unit\_tag.
 
 ### add\_quantity\_with\_qualifier(self,entity,main\_prop,qualifier\_prop,qualifier\_obj,tag,unit=False)
 
