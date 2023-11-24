@@ -619,6 +619,31 @@ Get the point of time property of entity. It adds a triple \<entity, wdt:P585, n
 * entity(str): The entity whose point of time is needed.
 * new\_var(str): The variable which represents the point of time value of the entity
 
+**example:**
+
+* Question: Get all the Pan Am Games held after 2001 (not including 2001).
+* Program:
+
+```python
+a=PyQL()
+a.add_type_constrain('Q230186', 'x0')
+a.add_time('x0', 'x1')
+a.add_filter(year('x1'), '>', 2001)
+a.set_answer("x0")
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x0 {
+	?x0 wdt:P31/wdt:P279* wd:Q230186.
+	
+	?x0 wdt:P585 ?x1.
+	
+	FILTER(YEAR(?x1) > 2001).
+}
+```
+
 #### add\_start\_time
 
 Get the start time property of entity. It adds a triple \<entity, wdt:P580, new\_var>
@@ -627,6 +652,25 @@ Get the start time property of entity. It adds a triple \<entity, wdt:P580, new\
 
 * entity(str): The entity whose start time is needed.
 * new\_var(str): The variable which represents the start time value of the entity
+
+**example:**
+
+* Question: What is the start time of Efficacy and Safety Study of Mongersen (GED-0301) for the Treatment of Subjects With Active Crohn's Disease?
+* Program:
+
+```python
+a = PyQL()
+a.add_start_time('Q64216670', 'x0')
+a.set_answer('x0')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x0 {
+	wd:Q64216670 wdt:P580 ?x0.
+}
+```
 
 #### add\_end\_time
 
@@ -637,6 +681,25 @@ Get the end time property of entity. It adds a triple \<entity, wdt:P582, new\_v
 * entity(str): The entity whose end time is needed.
 * new\_var(str): The variable which represents the end time value of the entity
 
+**example:**
+
+* Question: What is the start time of Efficacy and Safety Study of Mongersen (GED-0301) for the Treatment of Subjects With Active Crohn's Disease?
+* Program:
+
+```python
+a = PyQL()
+a.add_end_time('Q64216670', 'x0')
+a.set_answer('x0')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x0 {
+	wd:Q64216670 wdt:P582 ?x0.
+}
+```
+
 ## Arithmetic
 
 These functions are used inside an add\_bind. They are not member functions of PyQL class.
@@ -645,9 +708,71 @@ These functions are used inside an add\_bind. They are not member functions of P
 
 It creates an addition expression which adds up every element in para\_list.
 
+**example:**
+
+* Question: What is the number of deaths and injuried individuals in Atlanta spa shootings?
+* Program:
+
+```python
+a=PyQL()
+a.add_quantity('Q105982031','P1120','x0')
+a.add_quantity('Q105982031','P1339','x1')
+a.add_bind(add('x0', 'x1'), 'x2')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x2 {
+	wd:Q105982031 p:P1120 ?statement_x0.
+	?statement_x0 psv:P1120 ?value_st_x0.
+	?value_st_x0 wikibase:quantityAmount ?x0.
+	
+	wd:Q105982031 p:P1339 ?statement_x1.
+	?statement_x1 psv:P1339 ?value_st_x1.
+	?value_st_x1 wikibase:quantityAmount ?x1.
+	
+	BIND( ((?x0 + ?x1)) AS ?x2 )
+}
+```
+
 #### sub(para1, para2)
 
 It creates an subtraction expression of para1 subtacting para2.
+
+**example:**
+
+* Question: How much more is France's population than Italy's population in 2020?
+* Program:
+
+```python
+a = PyQL()
+a.add_quantity("Q142", "P1082", "x1", 2020)
+a.add_quantity("Q38", "P1082", "x2", 2020)
+a.add_bind(sub('x1','x2'),'x3')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x3 {
+	wd:Q142 p:P1082 ?statement_x1.
+	?statement_x1 psv:P1082 ?value_st_x1.
+	?value_st_x1 wikibase:quantityAmount ?x1.
+	?statement_x1 pq:P585 ?time_x1.
+	FILTER(YEAR(?time_x1) = 2020).
+	
+	
+	wd:Q38 p:P1082 ?statement_x2.
+	?statement_x2 psv:P1082 ?value_st_x2.
+	?value_st_x2 wikibase:quantityAmount ?x2.
+	?statement_x2 pq:P585 ?time_x2.
+	FILTER(YEAR(?time_x2) = 2020).
+	
+	
+	BIND( ((?x1 - ?x2)) AS ?x3 )
+}
+```
 
 #### mul(\*para\_list)
 
@@ -657,7 +782,78 @@ It creates an multiplication expression which multiplies every element in para\_
 
 It creates an division expression of para1 dividing para2.
 
+**example:**
+
+* Question: How many times the population of France is that of Italy in 2020?
+* Program:
+
+```python
+a = PyQL()
+a.add_quantity("Q142", "P1082", "x1", 2020)
+a.add_quantity("Q38", "P1082", "x2", 2020)
+a.add_bind(div('x1','x2'),'x3')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x3 {
+	wd:Q142 p:P1082 ?statement_x1.
+	?statement_x1 psv:P1082 ?value_st_x1.
+	?value_st_x1 wikibase:quantityAmount ?x1.
+	?statement_x1 pq:P585 ?time_x1.
+	FILTER(YEAR(?time_x1) = 2020).
+	
+	
+	wd:Q38 p:P1082 ?statement_x2.
+	?statement_x2 psv:P1082 ?value_st_x2.
+	?value_st_x2 wikibase:quantityAmount ?x2.
+	?statement_x2 pq:P585 ?time_x2.
+	FILTER(YEAR(?time_x2) = 2020).
+	
+	
+	BIND( (?x1 / ?x2) AS ?x3 )
+}
+```
+
 #### abs(para)
 
 It creates an expression which is abs(para)
+
+**example:**
+
+* Question: What is the difference between Italy's population and France's population in 2020?
+* Program:
+
+```python
+a = PyQL()
+a.add_quantity("Q142", "P1082", "x1", 2020)
+a.add_quantity("Q38", "P1082", "x2", 2020)
+a.add_bind(sub('x2', 'x1'), 'x3')
+a.add_bind(abs('x3'),'x4')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x4 {
+	wd:Q142 p:P1082 ?statement_x1.
+	?statement_x1 psv:P1082 ?value_st_x1.
+	?value_st_x1 wikibase:quantityAmount ?x1.
+	?statement_x1 pq:P585 ?time_x1.
+	FILTER(YEAR(?time_x1) = 2020).
+	
+	
+	wd:Q38 p:P1082 ?statement_x2.
+	?statement_x2 psv:P1082 ?value_st_x2.
+	?value_st_x2 wikibase:quantityAmount ?x2.
+	?statement_x2 pq:P585 ?time_x2.
+	FILTER(YEAR(?time_x2) = 2020).
+	
+	
+	BIND( ((?x2 - ?x1)) AS ?x3 )
+	
+	BIND( (ABS(?x3)) AS ?x4 )
+}
+```
 
