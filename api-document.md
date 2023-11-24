@@ -2,7 +2,7 @@
 
 ## Basic graph pattern
 
-#### add\_fact(self, s, p, o, p\_prefix)
+### add\_fact(self, s, p, o, p\_prefix)
 
 Add a \<s, p, o, prefix> triple to the query.
 
@@ -33,7 +33,7 @@ SELECT DISTINCT * {
 
 
 
-#### add\_quantity(entity, prop, tag,time=False)
+### add\_quantity(entity, prop, tag,time=False)
 
 This function is used to acquire the value of a quantity property.
 
@@ -71,7 +71,7 @@ SELECT DISTINCT ?x0 {
 
 
 
-#### add\_quantity\_by\_qualifier(self,entity,main\_prop,main\_obj,qualifier\_prop,tag)
+### add\_quantity\_by\_qualifier(self,entity,main\_prop,main\_obj,qualifier\_prop,tag)
 
 Acquire the value of a quantity property which acts as a qualifier.
 
@@ -108,7 +108,7 @@ SELECT DISTINCT ?x0 {
 
 
 
-#### add\_quantity\_with\_qualifier(self,entity,main\_prop,qualifier\_prop,qualifier\_obj,tag)
+### add\_quantity\_with\_qualifier(self,entity,main\_prop,qualifier\_prop,qualifier\_obj,tag)
 
 Acquire the value of a quantity property with a qualifire limiting other peoperties&#x20;
 
@@ -145,7 +145,7 @@ SELECT DISTINCT ?x0 {
 
 
 
-#### add\_type\_constrain(self, type\_id, new\_var)
+### add\_type\_constrain(self, type\_id, new\_var)
 
 add a type constraint to a variable
 
@@ -173,7 +173,9 @@ SELECT DISTINCT ?x0 {
 }
 ```
 
-#### add\_filter(self, compare\_obj1, operator, compare\_obj2)
+
+
+### add\_filter(self, compare\_obj1, operator, compare\_obj2)
 
 Given two comarison variables and an operator, add a filter.
 
@@ -210,7 +212,7 @@ SELECT DISTINCT ?x0 {
 
 
 
-#### add\_bind(self, equation, var\_name)
+### add\_bind(self, equation, var\_name)
 
 add a bind expression to assign the result of the expression equation to the variable var\_name.
 
@@ -247,7 +249,9 @@ SELECT DISTINCT ?x2 {
 }
 ```
 
-#### add\_assignment(self,var\_list,new\_var)
+
+
+### add\_assignment(self,var\_list,new\_var)
 
 add a values clause to generate a new variable new var of which the value includes all entities in var\_list.
 
@@ -283,7 +287,7 @@ LIMIT 1
 
 ## Aggreggation
 
-#### add\_max(self, max\_obj, return\_obj='\*',offset=0,limit=1)
+### add\_max(self, max\_obj, return\_obj='\*',offset=0,limit=1)
 
 Calculate the maximum value of max\_obj
 
@@ -319,7 +323,7 @@ ORDER BY DESC(?x0)
 LIMIT 1
 ```
 
-#### add\_min(self, min\_obj, return\_obj='\*',offset=0,limit=1)
+### add\_min(self, min\_obj, return\_obj='\*',offset=0,limit=1)
 
 Calculate the minimum value of min\_obj
 
@@ -355,7 +359,7 @@ ORDER BY (?x0)
 LIMIT 1
 ```
 
-#### add\_avg(self,avg\_var, new\_var, group\_obj=None)
+### add\_avg(self,avg\_var, new\_var, group\_obj=None)
 
 calculate the average value of variable avg\_var. The parameter new\_var is the variable of the calculated average value.
 
@@ -390,7 +394,7 @@ SELECT (AVG(?x0) AS ?x1 )  {
 
 
 
-#### add\_sum(self,sum\_var, new\_var, group\_obj=None)
+### add\_sum(self,sum\_var, new\_var, group\_obj=None)
 
 calculate the sum of the variable sum\_var. The parameter new\_var is the variable of the calculated sum value.
 
@@ -429,7 +433,7 @@ SELECT (SUM(?x1) AS ?x2 )  {
 
 
 
-#### add\_count(self,count\_obj,new\_var, group\_obj=None)
+### add\_count(self,count\_obj,new\_var, group\_obj=None)
 
 calculate the average value of variable count\_obj. The parameter new\_var is the variable of the calculated average value. It can only be used in the final step of a complete query or subquery. After use, either the entire query ends or it is treated as a subquery.&#x20;
 
@@ -458,7 +462,7 @@ SELECT (COUNT(DISTINCT ?x0) AS ?x1)  {
 }
 ```
 
-#### add\_rank(self, rank\_var, var\_list,new\_var)
+### add\_rank(self, rank\_var, var\_list,new\_var)
 
 calculate the rank of rank\_var's value among var\_list
 
@@ -507,7 +511,7 @@ SELECT (COUNT(DISTINCT ?x1) +1 AS ?x3) {
 
 ## Boolean
 
-#### add\_compare(self, obj1, op, obj2)
+### add\_compare(self, obj1, op, obj2)
 
 Determine whether obj1 and obj2 satisfies the size relationship represented by op. It can only be used in the final step of a complete query.
 
@@ -553,7 +557,7 @@ SELECT ?answer {
 
 ## Other
 
-#### add\_sub\_query(self,\*sub\_query)
+### add\_sub\_query(self,\*sub\_query)
 
 add a sub query to the sparql of this PyQL instance
 
@@ -610,7 +614,7 @@ SELECT DISTINCT ?x6 {
 
 
 
-#### add\_time(self, entity, new\_var)
+### add\_time(self, entity, new\_var)
 
 Get the point of time property of entity. It adds a triple \<entity, wdt:P585, new\_var>
 
@@ -644,7 +648,7 @@ SELECT DISTINCT ?x0 {
 }
 ```
 
-#### add\_start\_time
+### add\_start\_time
 
 Get the start time property of entity. It adds a triple \<entity, wdt:P580, new\_var>
 
@@ -672,7 +676,7 @@ SELECT DISTINCT ?x0 {
 }
 ```
 
-#### add\_end\_time
+### add\_end\_time
 
 Get the end time property of entity. It adds a triple \<entity, wdt:P582, new\_var>
 
@@ -704,7 +708,7 @@ SELECT DISTINCT ?x0 {
 
 These functions are used inside an add\_bind. They are not member functions of PyQL class.
 
-#### add(\*para\_list)
+### add(\*para\_list)
 
 It creates an addition expression which adds up every element in para\_list.
 
@@ -736,7 +740,7 @@ SELECT DISTINCT ?x2 {
 }
 ```
 
-#### sub(para1, para2)
+### sub(para1, para2)
 
 It creates an subtraction expression of para1 subtacting para2.
 
@@ -774,11 +778,37 @@ SELECT DISTINCT ?x3 {
 }
 ```
 
-#### mul(\*para\_list)
+### mul(\*para\_list)
 
 It creates an multiplication expression which multiplies every element in para\_list.
 
-#### div(para1, para2)
+**example:**
+
+* Question: What is a half of the population of France in 2020?
+* Program:
+
+```python
+a = PyQL()
+a.add_quantity("Q142", "P1082", "x1", 2020)
+a.add_bind(mul('x1', 0.5), 'x2')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x2 {
+	wd:Q142 p:P1082 ?statement_x1.
+	?statement_x1 psv:P1082 ?value_st_x1.
+	?value_st_x1 wikibase:quantityAmount ?x1.
+	?statement_x1 pq:P585 ?time_x1.
+	FILTER(YEAR(?time_x1) = 2020).
+	
+	
+	BIND( (?x1 * 0.5) AS ?x2 )
+}
+```
+
+### div(para1, para2)
 
 It creates an division expression of para1 dividing para2.
 
@@ -816,7 +846,7 @@ SELECT DISTINCT ?x3 {
 }
 ```
 
-#### abs(para)
+### abs(para)
 
 It creates an expression which is abs(para)
 
