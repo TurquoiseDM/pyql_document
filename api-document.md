@@ -2,7 +2,9 @@
 
 ## Basic graph pattern
 
-### add\_fact(self, s, p, o, p\_prefix)
+### add\_fact
+
+> **add\_fact(self, s, p, o, p\_prefix)**
 
 Add a \<s, p, o, prefix> triple to the query.
 
@@ -15,7 +17,10 @@ Add a \<s, p, o, prefix> triple to the query.
 
 **example:**
 
-* Question: What is the manufacturer of 2T Stalker
+* Question:&#x20;
+
+> What is the manufacturer of 2T Stalker
+
 * Program:
 
 ```python
@@ -31,9 +36,9 @@ SELECT DISTINCT * {
 }
 ```
 
+### add\_quantity
 
-
-### add\_quantity(entity, prop, tag,time=False)
+> **add\_quantity(entity, prop, tag,time=False)**
 
 This function is used to acquire the value of a quantity property.
 
@@ -49,7 +54,10 @@ This function is used to acquire the value of a quantity property.
 
 **example:**
 
-* Question: What is the GDP of French economy in the year 2007
+* Question:&#x20;
+
+> What is the GDP of French economy in the year 2007
+
 * Program:
 
 ```python
@@ -71,7 +79,9 @@ SELECT DISTINCT ?x0 {
 
 
 
-### add\_quantity\_by\_qualifier(self,entity,main\_prop,main\_obj,qualifier\_prop,tag)
+### add\_quantity\_by\_qualifier
+
+> **add\_quantity\_by\_qualifier(self,entity,main\_prop,main\_obj,qualifier\_prop,tag)**
 
 Acquire the value of a quantity property which acts as a qualifier.
 
@@ -87,7 +97,10 @@ For example, the entity iPhone 12 has a property 'made from material' of which t
 
 **example:**
 
-* Question: What is the duration of Soyuz MS-21's time on the moon
+* Question:&#x20;
+
+> What is the duration of Soyuz MS-21's time on the moon
+
 * Program:
 
 ```python
@@ -108,7 +121,9 @@ SELECT DISTINCT ?x0 {
 
 
 
-### add\_quantity\_with\_qualifier(self,entity,main\_prop,qualifier\_prop,qualifier\_obj,tag)
+### add\_quantity\_with\_qualifier
+
+> **add\_quantity\_with\_qualifier(self,entity,main\_prop,qualifier\_prop,qualifier\_obj,tag)**
 
 Acquire the value of a quantity property with a qualifire limiting other peoperties&#x20;
 
@@ -124,7 +139,10 @@ For example, the computer performance of Nvidia GeForce RTX 3090 has 4 statement
 
 **example:**
 
-* Question: What is the solubility of Dihydrogen disulfide in water
+* Question:&#x20;
+
+> What is the solubility of Dihydrogen disulfide in water
+
 * Program:
 
 ```python
@@ -145,7 +163,9 @@ SELECT DISTINCT ?x0 {
 
 
 
-### add\_type\_constrain(self, type\_id, new\_var)
+### add\_type\_constrain
+
+> **add\_type\_constrain(self, type\_id, new\_var)**
 
 add a type constraint to a variable
 
@@ -177,6 +197,8 @@ SELECT DISTINCT ?x0 {
 
 ### add\_filter(self, compare\_obj1, operator, compare\_obj2)
 
+> **add\_filter(self, compare\_obj1, operator, compare\_obj2)**
+
 Given two comarison variables and an operator, add a filter.
 
 **Parameters:**
@@ -187,7 +209,10 @@ Given two comarison variables and an operator, add a filter.
 
 **example:**
 
-* Question: Get all the Pan Am Games held after 2001 (not including 2001).
+* Question:
+
+> Get all the Pan Am Games held after 2001 (not including 2001).
+
 * Program:
 
 ```python
@@ -212,7 +237,9 @@ SELECT DISTINCT ?x0 {
 
 
 
-### add\_bind(self, equation, var\_name)
+### add\_bind
+
+> **add\_bind(self, equation, var\_name)**
 
 add a bind expression to assign the result of the expression equation to the variable var\_name.
 
@@ -223,7 +250,10 @@ add a bind expression to assign the result of the expression equation to the var
 
 **example:**
 
-* Question: What is the number of deaths and injuried individuals in Atlanta spa shootings?
+* Question:
+
+> What is the number of deaths and injuried individuals in Atlanta spa shootings?
+
 * Program:
 
 ```python
@@ -251,7 +281,9 @@ SELECT DISTINCT ?x2 {
 
 
 
-### add\_assignment(self,var\_list,new\_var)
+### add\_assignment
+
+> **add\_assignment(self,var\_list,new\_var)**
 
 add a values clause to generate a new variable new var of which the value includes all entities in var\_list.
 
@@ -262,7 +294,10 @@ add a values clause to generate a new variable new var of which the value includ
 
 **example:**
 
-* Question: Among BMW N57 and Renault E-Type engine, who has the highest compression ratio?
+* Question:
+
+> Among BMW N57 and Renault E-Type engine, who has the highest compression ratio?
+
 * Program:
 
 ```python
@@ -287,7 +322,9 @@ LIMIT 1
 
 
 
-### add\_sub\_query(self,\*sub\_query)
+### add\_sub\_query
+
+> **add\_sub\_query(self,\*sub\_query)**
 
 add a sub query to the sparql of this PyQL instance
 
@@ -297,7 +334,10 @@ add a sub query to the sparql of this PyQL instance
 
 **example:**
 
-* Question: By how much is the average lowest air pressure of a category 5 hurricane lower than that of a category 3 hurricane?
+* Question:&#x20;
+
+> By how much is the average lowest air pressure of a category 5 hurricane lower than that of a category 3 hurricane?
+
 * Program:
 
 ```python
@@ -344,7 +384,9 @@ SELECT DISTINCT ?x6 {
 
 ## Aggreggation
 
-### add\_max(self, max\_obj, return\_obj='\*',offset=0,limit=1)
+### add\_max
+
+> **add\_max(self, max\_obj, return\_obj='\*',offset=0,limit=1)**
 
 Calculate the maximum value of max\_obj
 
@@ -357,7 +399,10 @@ Calculate the maximum value of max\_obj
 
 **example:**
 
-* Question: Among BMW N57 and Renault E-Type engine, who has the highest compression ratio?
+* Question:
+
+> Among BMW N57 and Renault E-Type engine, who has the highest compression ratio?
+
 * Program:
 
 ```python
@@ -381,6 +426,8 @@ LIMIT 1
 ```
 
 ### add\_min(self, min\_obj, return\_obj='\*',offset=0,limit=1)
+
+> **add\_min(self, min\_obj, return\_obj='\*',offset=0,limit=1)**
 
 Calculate the minimum value of min\_obj
 
@@ -416,7 +463,9 @@ ORDER BY (?x0)
 LIMIT 1
 ```
 
-### add\_avg(self,avg\_var, new\_var, group\_obj=None)
+### add\_avg
+
+> **add\_avg(self,avg\_var, new\_var, group\_obj=None)**
 
 calculate the average value of variable avg\_var. The parameter new\_var is the variable of the calculated average value.
 
@@ -428,7 +477,10 @@ calculate the average value of variable avg\_var. The parameter new\_var is the 
 
 **example:**
 
-* Question: Among BMW N57 and Renault E-Type engine, what is the average compression ratio?
+* Question:
+
+> Among BMW N57 and Renault E-Type engine, what is the average compression ratio?
+
 * Program:
 
 ```python
@@ -451,7 +503,9 @@ SELECT (AVG(?x0) AS ?x1 )  {
 
 
 
-### add\_sum(self,sum\_var, new\_var, group\_obj=None)
+### add\_sum
+
+> **add\_sum(self,sum\_var, new\_var, group\_obj=None)**
 
 calculate the sum of the variable sum\_var. The parameter new\_var is the variable of the calculated sum value.
 
@@ -463,7 +517,10 @@ calculate the sum of the variable sum\_var. The parameter new\_var is the variab
 
 **example:**
 
-* Question: What are the female population of all the communes of France in 2017?
+* Question:
+
+> What are the female population of all the communes of France in 2017?
+
 * Program:
 
 ```python
@@ -490,7 +547,9 @@ SELECT (SUM(?x1) AS ?x2 )  {
 
 
 
-### add\_count(self,count\_obj,new\_var, group\_obj=None)
+### add\_count
+
+> **add\_count(self,count\_obj,new\_var, group\_obj=None)**
 
 calculate the average value of variable count\_obj. The parameter new\_var is the variable of the calculated average value. It can only be used in the final step of a complete query or subquery. After use, either the entire query ends or it is treated as a subquery.&#x20;
 
@@ -502,7 +561,10 @@ calculate the average value of variable count\_obj. The parameter new\_var is th
 
 **example:**
 
-* Question: What is the number of all the communes of France?
+* Question:
+
+> What is the number of all the communes of France?
+
 * Program:
 
 ```python
@@ -521,6 +583,8 @@ SELECT (COUNT(DISTINCT ?x0) AS ?x1)  {
 
 ### add\_rank(self, rank\_var, var\_list,new\_var)
 
+> **add\_rank(self, rank\_var, var\_list,new\_var)**
+
 calculate the rank of rank\_var's value among var\_list
 
 **Parameters:**
@@ -531,7 +595,10 @@ calculate the rank of rank\_var's value among var\_list
 
 **example:**
 
-* Question: What is Italy's population ranking among all the sovereign states in 2020?
+* Question:
+
+> What is Italy's population ranking among all the sovereign states in 2020?
+
 * Program:
 
 ```python
@@ -568,7 +635,9 @@ SELECT (COUNT(DISTINCT ?x1) +1 AS ?x3) {
 
 ## Boolean
 
-### add\_compare(self, obj1, op, obj2)
+### add\_compare
+
+> **add\_compare(self, obj1, op, obj2)**
 
 Determine whether obj1 and obj2 satisfies the size relationship represented by op. It can only be used in the final step of a complete query.
 
@@ -580,7 +649,10 @@ Determine whether obj1 and obj2 satisfies the size relationship represented by o
 
 **example:**
 
-* Question: Is Italy's population more than France's population in 2020?
+* Question:
+
+> Is Italy's population more than France's population in 2020?
+
 * Program:
 
 ```python
@@ -614,7 +686,9 @@ SELECT ?answer {
 
 ## Other
 
-### add\_time(self, entity, new\_var)
+### add\_time
+
+> **add\_time(self, entity, new\_var)**
 
 Get the point of time property of entity. It adds a triple \<entity, wdt:P585, new\_var>
 
@@ -625,7 +699,10 @@ Get the point of time property of entity. It adds a triple \<entity, wdt:P585, n
 
 **example:**
 
-* Question: Get all the Pan Am Games held after 2001 (not including 2001).
+* Question:
+
+> Get all the Pan Am Games held after 2001 (not including 2001).
+
 * Program:
 
 ```python
@@ -650,6 +727,8 @@ SELECT DISTINCT ?x0 {
 
 ### add\_start\_time
 
+> **add\_start\_time(self, entity,new\_var)**
+
 Get the start time property of entity. It adds a triple \<entity, wdt:P580, new\_var>
 
 **Parameters:**
@@ -659,7 +738,10 @@ Get the start time property of entity. It adds a triple \<entity, wdt:P580, new\
 
 **example:**
 
-* Question: What is the start time of Efficacy and Safety Study of Mongersen (GED-0301) for the Treatment of Subjects With Active Crohn's Disease?
+* Question:
+
+> What is the start time of Efficacy and Safety Study of Mongersen (GED-0301) for the Treatment of Subjects With Active Crohn's Disease?
+
 * Program:
 
 ```python
@@ -678,6 +760,8 @@ SELECT DISTINCT ?x0 {
 
 ### add\_end\_time
 
+> **add\_end\_time(self, entity, new\_var)**
+
 Get the end time property of entity. It adds a triple \<entity, wdt:P582, new\_var>
 
 **Parameters:**
@@ -687,7 +771,10 @@ Get the end time property of entity. It adds a triple \<entity, wdt:P582, new\_v
 
 **example:**
 
-* Question: What is the start time of Efficacy and Safety Study of Mongersen (GED-0301) for the Treatment of Subjects With Active Crohn's Disease?
+* Question:
+
+> What is the start time of Efficacy and Safety Study of Mongersen (GED-0301) for the Treatment of Subjects With Active Crohn's Disease?
+
 * Program:
 
 ```python
@@ -708,13 +795,18 @@ SELECT DISTINCT ?x0 {
 
 These functions are used inside an add\_bind. They are not member functions of PyQL class.
 
-### add(\*para\_list)
+### add
+
+> add(\*para\_list)
 
 It creates an addition expression which adds up every element in para\_list.
 
 **example:**
 
-* Question: What is the number of deaths and injuried individuals in Atlanta spa shootings?
+* Question:
+
+> What is the number of deaths and injuried individuals in Atlanta spa shootings?
+
 * Program:
 
 ```python
@@ -740,13 +832,18 @@ SELECT DISTINCT ?x2 {
 }
 ```
 
-### sub(para1, para2)
+### sub
+
+> **sub(para1, para2)**
 
 It creates an subtraction expression of para1 subtacting para2.
 
 **example:**
 
-* Question: How much more is France's population than Italy's population in 2020?
+* Question:
+
+> How much more is France's population than Italy's population in 2020?
+
 * Program:
 
 ```python
@@ -778,13 +875,18 @@ SELECT DISTINCT ?x3 {
 }
 ```
 
-### mul(\*para\_list)
+### mul
+
+> **mul(\*para\_list)**
 
 It creates an multiplication expression which multiplies every element in para\_list.
 
 **example:**
 
-* Question: What is a half of the population of France in 2020?
+* Question:
+
+> What is a half of the population of France in 2020?
+
 * Program:
 
 ```python
@@ -810,11 +912,16 @@ SELECT DISTINCT ?x2 {
 
 ### div(para1, para2)
 
+> **div(para1, para2)**
+
 It creates an division expression of para1 dividing para2.
 
 **example:**
 
-* Question: How many times the population of France is that of Italy in 2020?
+* Question:
+
+> How many times the population of France is that of Italy in 2020?
+
 * Program:
 
 ```python
@@ -846,13 +953,18 @@ SELECT DISTINCT ?x3 {
 }
 ```
 
-### abs(para)
+### abs
+
+> **abs(para)**
 
 It creates an expression which is abs(para)
 
 **example:**
 
-* Question: What is the difference between Italy's population and France's population in 2020?
+* Question:
+
+> What is the difference between Italy's population and France's population in 2020?
+
 * Program:
 
 ```python
