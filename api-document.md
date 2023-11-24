@@ -4,7 +4,7 @@
 
 #### add\_fact(self, s, p, o, p\_prefix)
 
-Add a \<s, prefix: p, o> triple to the query.
+Add a \<s, p, o, prefix> triple to the query.
 
 **Parameters:**
 
