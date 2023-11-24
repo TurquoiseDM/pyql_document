@@ -54,18 +54,18 @@ This function is used to acquire the value of a quantity property.
 
 ```python
 a=PyQL()
-a.add_quantity('Q8057','P4010','x6',2007)
+a.add_quantity('Q8057','P4010','x0',2007)
 ```
 
 * SPARQL:
 
 ```sparql
-SELECT DISTINCT ?x6 {
-	wd:Q8057 p:P4010 ?statement_x6.
-	?statement_x6 psv:P4010 ?value_st_x6.
-	?value_st_x6 wikibase:quantityAmount ?x6.
-	?statement_x6 pq:P585 ?time_x6.
-	FILTER(YEAR(?time_x6) = 2007).
+SELECT DISTINCT ?x0 {
+	wd:Q8057 p:P4010 ?statement_x0.
+	?statement_x0 psv:P4010 ?value_st_x0.
+	?value_st_x0 wikibase:quantityAmount ?x0.
+	?statement_x0 pq:P585 ?time_x0.
+	FILTER(YEAR(?time_x0) = 2007).
 }
 ```
 
@@ -85,6 +85,29 @@ For example, the entity iPhone 12 has a property 'made from material' of which t
 * qualifier\_prop(str): the quantity property which acts as a qualifier. For example, mass.
 * tag(str): An identifier used to name variables. Ultimately the variable with the property value of this quantity property is the tag.
 
+**example:**
+
+* Question: What is the duration of Soyuz MS-21's time on the moon
+* Program:
+
+```python
+a=PyQL()
+a.add_quantity_by_qualifier('Q100375849','P793','x1','P2047','x0')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x0 {
+	wd:Q100375849 p:P793 ?statement_x0.
+	?statement_x0 ps:P793 ?x1.
+	?statement_x0 pqv:P2047 ?value_st_x0.
+	?value_st_x0 wikibase:quantityAmount ?x0.
+}
+```
+
+
+
 #### add\_quantity\_with\_qualifier(self,entity,main\_prop,qualifier\_prop,qualifier\_obj,tag)
 
 Acquire the value of a quantity property with a qualifire limiting other peoperties&#x20;
@@ -99,6 +122,29 @@ For example, the computer performance of Nvidia GeForce RTX 3090 has 4 statement
 * qualifier\_obj(str): the value of qualifier property, such as single-precision floating-point format.
 * tag(str): An identifier used to name variables. Ultimately the variable with the property value of this quantity property is the tag.
 
+**example:**
+
+* Question: What is the solubility of Dihydrogen disulfide in water
+* Program:
+
+```python
+a=PyQL()
+a.add_quantity_with_qualifier('Q170591','P2177','P2178','Q283','x0')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x0 {
+	wd:Q170591 p:P2177 ?statement_x0.
+	?statement_x0 psv:P2177 ?value_st_x0.
+	?value_st_x0 wikibase:quantityAmount ?x0.
+	?statement_x0 pq:P2178 wd:Q283.
+}
+```
+
+
+
 #### add\_type\_constrain(self, type\_id, new\_var)
 
 add a type constraint to a variable
@@ -107,6 +153,25 @@ add a type constraint to a variable
 
 * type\_id(str): ID of the type
 * new\_var(str): the entity to be constrained
+
+**example:**
+
+* Question: Get all the Pan Am Games.
+* Program:
+
+```python
+a=PyQL()
+a.add_type_constrain('Q230186','x0')
+a.set_answer("x0")
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x0 {
+	?x0 wdt:P31/wdt:P279* wd:Q230186.
+}
+```
 
 #### add\_filter(self, compare\_obj1, operator, compare\_obj2)
 
@@ -118,6 +183,33 @@ Given two comarison variables and an operator, add a filter.
 * operator(str): operator
 * compare\_obj2(str): comparison variable 2
 
+**example:**
+
+* Question: Get all the Pan Am Games held after 2001 (not including 2001).
+* Program:
+
+```python
+a=PyQL()
+a.add_type_constrain('Q230186', 'x0')
+a.add_time('x0', 'x1')
+a.add_filter(year('x1'), '>', 2001)
+a.set_answer("x0")
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x0 {
+	?x0 wdt:P31/wdt:P279* wd:Q230186.
+	
+	?x0 wdt:P585 ?x1.
+	
+	FILTER(YEAR(?x1) > 2001).
+}
+```
+
+
+
 #### add\_bind(self, equation, var\_name)
 
 add a bind expression to assign the result of the expression equation to the variable var\_name.
@@ -127,6 +219,34 @@ add a bind expression to assign the result of the expression equation to the var
 * equation(str): The expression to be binded. Bracket is not necessary. It will be added automatically.
 * var\_name(str): The expression will be assigned to this variable.
 
+**example:**
+
+* Question: What is the number of deaths and injuried individuals in Atlanta spa shootings?
+* Program:
+
+```python
+a=PyQL()
+a.add_quantity('Q105982031','P1120','x0')
+a.add_quantity('Q105982031','P1339','x1')
+a.add_bind(add('x0', 'x1'), 'x2')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x2 {
+	wd:Q105982031 p:P1120 ?statement_x0.
+	?statement_x0 psv:P1120 ?value_st_x0.
+	?value_st_x0 wikibase:quantityAmount ?x0.
+	
+	wd:Q105982031 p:P1339 ?statement_x1.
+	?statement_x1 psv:P1339 ?value_st_x1.
+	?value_st_x1 wikibase:quantityAmount ?x1.
+	
+	BIND( ((?x0 + ?x1)) AS ?x2 )
+}
+```
+
 #### add\_assignment(self,var\_list,new\_var)
 
 add a values clause to generate a new variable new var of which the value includes all entities in var\_list.
@@ -135,6 +255,31 @@ add a values clause to generate a new variable new var of which the value includ
 
 * equation(list): an entities list, such as \['Q123', 'Q186']
 * new\_var(str): the new variable
+
+**example:**
+
+* Question: Among BMW N57 and Renault E-Type engine, who has the highest compression ratio?
+* Program:
+
+```python
+a=PyQL()
+a.add_assignment(['Q796629','Q3866356'],'x2')
+a.add_quantity('x2','P1247','x0')
+a.add_max('x0','x2')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x2 {
+	Values ?x2 {wd:Q796629 wd:Q3866356}
+	?x2 p:P1247 ?statement_x0.
+	?statement_x0 psv:P1247 ?value_st_x0.
+	?value_st_x0 wikibase:quantityAmount ?x0.
+}
+ORDER BY DESC(?x0)
+LIMIT 1
+```
 
 ## Aggreggation
 
@@ -149,6 +294,31 @@ Calculate the maximum value of max\_obj
 * offset(str): the number in offset. For example, to get the second biggest one, set offset=2
 * limit(str): the number in limit. For example, to get the three biggest one, set limit=3, offset=0
 
+**example:**
+
+* Question: Among BMW N57 and Renault E-Type engine, who has the highest compression ratio?
+* Program:
+
+```python
+a=PyQL()
+a.add_assignment(['Q796629','Q3866356'],'x2')
+a.add_quantity('x2','P1247','x0')
+a.add_max('x0','x2')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x2 {
+	Values ?x2 {wd:Q796629 wd:Q3866356}
+	?x2 p:P1247 ?statement_x0.
+	?statement_x0 psv:P1247 ?value_st_x0.
+	?value_st_x0 wikibase:quantityAmount ?x0.
+}
+ORDER BY DESC(?x0)
+LIMIT 1
+```
+
 #### add\_min(self, min\_obj, return\_obj='\*',offset=0,limit=1)
 
 Calculate the minimum value of min\_obj
@@ -160,6 +330,31 @@ Calculate the minimum value of min\_obj
 * offset(str): the number in offset. For example, to get the second smallest one, set offset=2
 * limit(str): the number in limit. For example, to get the three smallest one, set limit=3, offset=0
 
+**example:**
+
+* Question: Among BMW N57 and Renault E-Type engine, who has the lowest compression ratio?
+* Program:
+
+```python
+a=PyQL()
+a.add_assignment(['Q796629','Q3866356'],'x2')
+a.add_quantity('x2','P1247','x0')
+a.add_min('x0','x2')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x2 {
+	Values ?x2 {wd:Q796629 wd:Q3866356}
+	?x2 p:P1247 ?statement_x0.
+	?statement_x0 psv:P1247 ?value_st_x0.
+	?value_st_x0 wikibase:quantityAmount ?x0.
+}
+ORDER BY (?x0)
+LIMIT 1
+```
+
 #### add\_avg(self,avg\_var, new\_var, group\_obj=None)
 
 calculate the average value of variable avg\_var. The parameter new\_var is the variable of the calculated average value.
@@ -169,6 +364,31 @@ calculate the average value of variable avg\_var. The parameter new\_var is the 
 * avg\_var(str): the variable which needs to be averaged
 * new\_var(str): the variable of the calculated average value
 * group\_obj(str): the variable which needs to be put in a group by
+
+**example:**
+
+* Question: Among BMW N57 and Renault E-Type engine, what is the average compression ratio?
+* Program:
+
+```python
+a=PyQL()
+a.add_assignment(['Q796629','Q3866356'],'x2')
+a.add_quantity('x2','P1247','x0')
+a.add_avg('x0','x1')
+```
+
+* SPARQL:
+
+```sparql
+SELECT (AVG(?x0) AS ?x1 )  {
+	Values ?x2 {wd:Q796629 wd:Q3866356}
+	?x2 p:P1247 ?statement_x0.
+	?statement_x0 psv:P1247 ?value_st_x0.
+	?value_st_x0 wikibase:quantityAmount ?x0.
+}
+```
+
+
 
 #### add\_sum(self,sum\_var, new\_var, group\_obj=None)
 
@@ -180,6 +400,35 @@ calculate the sum of the variable sum\_var. The parameter new\_var is the variab
 * new\_var(str): the variable of the calculated sum value
 * group\_obj(str): the variable which needs to be put in a group by
 
+**example:**
+
+* Question: What are the female population of all the communes of France in 2017?
+* Program:
+
+```python
+a=PyQL()
+a.add_type_constrain('Q484170','x0')
+a.add_quantity('x0','P1539','x1',2017)
+a.add_sum("x1","x2")
+```
+
+* SPARQL:
+
+```sparql
+SELECT (SUM(?x1) AS ?x2 )  {
+	?x0 wdt:P31/wdt:P279* wd:Q484170.
+	
+	?x0 p:P1539 ?statement_x1.
+	?statement_x1 psv:P1539 ?value_st_x1.
+	?value_st_x1 wikibase:quantityAmount ?x1.
+	?statement_x1 pq:P585 ?time_x1.
+	FILTER(YEAR(?time_x1) = 2017).
+	
+}
+```
+
+
+
 #### add\_count(self,count\_obj,new\_var, group\_obj=None)
 
 calculate the average value of variable count\_obj. The parameter new\_var is the variable of the calculated average value. It can only be used in the final step of a complete query or subquery. After use, either the entire query ends or it is treated as a subquery.&#x20;
@@ -190,6 +439,25 @@ calculate the average value of variable count\_obj. The parameter new\_var is th
 * new\_var(str): the variable of the calculated counting value
 * group\_obj(str): the variable which needs to be put in a group by
 
+**example:**
+
+* Question: What is the number of all the communes of France?
+* Program:
+
+```python
+a=PyQL()
+a.add_type_constrain('Q484170','x0')
+a.add_count("x0","x1")
+```
+
+* SPARQL:
+
+```sparql
+SELECT (COUNT(DISTINCT ?x0) AS ?x1)  {
+	?x0 wdt:P31/wdt:P279* wd:Q484170.
+}
+```
+
 #### add\_rank(self, rank\_var, var\_list,new\_var)
 
 calculate the rank of rank\_var's value among var\_list
@@ -199,6 +467,43 @@ calculate the rank of rank\_var's value among var\_list
 * rank\_var(str): the variable of which the rank needs to be calculated
 * var\_list(str): the rank is calculated in this list which includes rank\_var
 * new\_var(str): the variable of the rank result
+
+**example:**
+
+* Question: What is Italy's population ranking among all the sovereign states in 2020?
+* Program:
+
+```python
+a=PyQL()
+a.add_type_constrain('Q3624078','x0')
+a.add_quantity("x0", "P1082", "x1", 2020)
+a.add_quantity("Q38","P1082","x2",2020)
+a.add_rank("x2","x1","x3")
+```
+
+* SPARQL:
+
+```sparql
+SELECT (COUNT(DISTINCT ?x1) +1 AS ?x3) {
+	?x0 wdt:P31/wdt:P279* wd:Q3624078.
+	
+	?x0 p:P1082 ?statement_x1.
+	?statement_x1 psv:P1082 ?value_st_x1.
+	?value_st_x1 wikibase:quantityAmount ?x1.
+	?statement_x1 pq:P585 ?time_x1.
+	FILTER(YEAR(?time_x1) = 2020).
+	
+	
+	wd:Q38 p:P1082 ?statement_x2.
+	?statement_x2 psv:P1082 ?value_st_x2.
+	?value_st_x2 wikibase:quantityAmount ?x2.
+	?statement_x2 pq:P585 ?time_x2.
+	FILTER(YEAR(?time_x2) = 2020).
+	
+	
+	FILTER(?x2 < ?x1).
+}
+```
 
 ## Boolean
 
@@ -212,6 +517,40 @@ Determine whether obj1 and obj2 satisfies the size relationship represented by o
 * op(str): operator
 * obj2(str): comparison variable 2
 
+**example:**
+
+* Question: Is Italy's population more than France's population in 2020?
+* Program:
+
+```python
+a = PyQL()
+a.add_quantity("Q142", "P1082", "x1", 2020)
+a.add_quantity("Q38", "P1082", "x2", 2020)
+a.add_compare("x2",">","x1")
+```
+
+* SPARQL:
+
+```sparql
+SELECT ?answer {
+	wd:Q142 p:P1082 ?statement_x1.
+	?statement_x1 psv:P1082 ?value_st_x1.
+	?value_st_x1 wikibase:quantityAmount ?x1.
+	?statement_x1 pq:P585 ?time_x1.
+	FILTER(YEAR(?time_x1) = 2020).
+	
+	
+	wd:Q38 p:P1082 ?statement_x2.
+	?statement_x2 psv:P1082 ?value_st_x2.
+	?value_st_x2 wikibase:quantityAmount ?x2.
+	?statement_x2 pq:P585 ?time_x2.
+	FILTER(YEAR(?time_x2) = 2020).
+	
+	
+	BIND( (IF(?x2 > ?x1, "TRUE", "FALSE")) AS ?answer )
+}
+```
+
 ## Other
 
 #### add\_sub\_query(self,\*sub\_query)
@@ -221,6 +560,55 @@ add a sub query to the sparql of this PyQL instance
 **Parameters:**
 
 * sub\_query(PyQL): the PyQL instance which needs to be added as a sub\_query
+
+**example:**
+
+* Question: By how much is the average lowest air pressure of a category 5 hurricane lower than that of a category 3 hurricane?
+* Program:
+
+```python
+a = PyQL()
+a.add_quantity('x4', 'P2532', 'x2')
+a.add_fact('x4', 'P31', 'Q63100611', 'wdt')
+a.add_avg('x2', 'x1')
+b = PyQL()
+b.add_quantity('x5', 'P2532', 'x3')
+b.add_fact('x5', 'P31', 'Q63100595', 'wdt')
+b.add_avg('x3', 'x0')
+c = PyQL()
+c.add_bind(sub('x0', 'x1'), 'x6')
+c.add_sub_query(a, b)
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x6 {
+	{
+		SELECT (AVG(?x2) AS ?x1 )  {
+			?x4 p:P2532 ?statement_x2.
+			?statement_x2 psv:P2532 ?value_st_x2.
+			?value_st_x2 wikibase:quantityAmount ?x2.
+			
+			?x4 wdt:P31 wd:Q63100611.
+		}
+		
+	}
+	{
+		SELECT (AVG(?x3) AS ?x0 )  {
+			?x5 p:P2532 ?statement_x3.
+			?statement_x3 psv:P2532 ?value_st_x3.
+			?value_st_x3 wikibase:quantityAmount ?x3.
+			
+			?x5 wdt:P31 wd:Q63100595.
+		}
+		
+	}
+	BIND( ((?x0 - ?x1)) AS ?x6 )
+}
+```
+
+
 
 #### add\_time(self, entity, new\_var)
 
@@ -251,7 +639,7 @@ Get the end time property of entity. It adds a triple \<entity, wdt:P582, new\_v
 
 ## Arithmetic
 
-These functions are used alone. They do not belong to an PyQL instance.
+These functions are used inside an add\_bind. They are not member functions of PyQL class.
 
 #### add(\*para\_list)
 
