@@ -195,7 +195,7 @@ SELECT DISTINCT ?x0 {
 
 
 
-### add\_filter(self, compare\_obj1, operator, compare\_obj2)
+### add\_filter
 
 > **add\_filter(self, compare\_obj1, operator, compare\_obj2)**
 
@@ -425,7 +425,7 @@ ORDER BY DESC(?x0)
 LIMIT 1
 ```
 
-### add\_min(self, min\_obj, return\_obj='\*',offset=0,limit=1)
+### add\_min
 
 > **add\_min(self, min\_obj, return\_obj='\*',offset=0,limit=1)**
 
@@ -581,7 +581,7 @@ SELECT (COUNT(DISTINCT ?x0) AS ?x1)  {
 }
 ```
 
-### add\_rank(self, rank\_var, var\_list,new\_var)
+### add\_rank
 
 > **add\_rank(self, rank\_var, var\_list,new\_var)**
 
@@ -910,7 +910,7 @@ SELECT DISTINCT ?x2 {
 }
 ```
 
-### div(para1, para2)
+### div
 
 > **div(para1, para2)**
 
