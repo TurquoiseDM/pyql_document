@@ -6,9 +6,16 @@ PyQL encapsulates various SPARQL syntax elements, such as Basic Graph Patterns, 
 
 A PyQL is a sequence of commands: $$\{c_{1},c_{2}, ..., c_{n}\}$$, where $$c_{i}$$ either initializes a PyQL object or calls a function on the object.&#x20;
 
-> a=PyQL() # initializes a PyQL object&#x20;
->
-> a.add\_type\_constrain(xxxxxx) ＃call a function to add type constrain
+```python
+# initializes a PyQL object
+a=PyQL() 
+# call a function to add type constrain 
+a.add_type_constrain('Q3624078', 'x0')
+# get the value of a quantity property of x0 with the time constrained within year 2020 
+a.add_quantity("x0",'P1082','x1',2020) 
+# get the maximum value among all the values of variable x1
+a.add_max('x1','x1') 
+```
 
 When write a PyQL, you need to first initialize a PyQL object and sequentially add functions to construct the whole query.
 
