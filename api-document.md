@@ -285,6 +285,63 @@ ORDER BY DESC(?x0)
 LIMIT 1
 ```
 
+
+
+### add\_sub\_query(self,\*sub\_query)
+
+add a sub query to the sparql of this PyQL instance
+
+**Parameters:**
+
+* sub\_query(PyQL): the PyQL instance which needs to be added as a sub\_query
+
+**example:**
+
+* Question: By how much is the average lowest air pressure of a category 5 hurricane lower than that of a category 3 hurricane?
+* Program:
+
+```python
+a = PyQL()
+a.add_quantity('x4', 'P2532', 'x2')
+a.add_fact('x4', 'P31', 'Q63100611', 'wdt')
+a.add_avg('x2', 'x1')
+b = PyQL()
+b.add_quantity('x5', 'P2532', 'x3')
+b.add_fact('x5', 'P31', 'Q63100595', 'wdt')
+b.add_avg('x3', 'x0')
+c = PyQL()
+c.add_bind(sub('x0', 'x1'), 'x6')
+c.add_sub_query(a, b)
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x6 {
+	{
+		SELECT (AVG(?x2) AS ?x1 )  {
+			?x4 p:P2532 ?statement_x2.
+			?statement_x2 psv:P2532 ?value_st_x2.
+			?value_st_x2 wikibase:quantityAmount ?x2.
+			
+			?x4 wdt:P31 wd:Q63100611.
+		}
+		
+	}
+	{
+		SELECT (AVG(?x3) AS ?x0 )  {
+			?x5 p:P2532 ?statement_x3.
+			?statement_x3 psv:P2532 ?value_st_x3.
+			?value_st_x3 wikibase:quantityAmount ?x3.
+			
+			?x5 wdt:P31 wd:Q63100595.
+		}
+		
+	}
+	BIND( ((?x0 - ?x1)) AS ?x6 )
+}
+```
+
 ## Aggreggation
 
 ### add\_max(self, max\_obj, return\_obj='\*',offset=0,limit=1)
@@ -556,63 +613,6 @@ SELECT ?answer {
 ```
 
 ## Other
-
-### add\_sub\_query(self,\*sub\_query)
-
-add a sub query to the sparql of this PyQL instance
-
-**Parameters:**
-
-* sub\_query(PyQL): the PyQL instance which needs to be added as a sub\_query
-
-**example:**
-
-* Question: By how much is the average lowest air pressure of a category 5 hurricane lower than that of a category 3 hurricane?
-* Program:
-
-```python
-a = PyQL()
-a.add_quantity('x4', 'P2532', 'x2')
-a.add_fact('x4', 'P31', 'Q63100611', 'wdt')
-a.add_avg('x2', 'x1')
-b = PyQL()
-b.add_quantity('x5', 'P2532', 'x3')
-b.add_fact('x5', 'P31', 'Q63100595', 'wdt')
-b.add_avg('x3', 'x0')
-c = PyQL()
-c.add_bind(sub('x0', 'x1'), 'x6')
-c.add_sub_query(a, b)
-```
-
-* SPARQL:
-
-```sparql
-SELECT DISTINCT ?x6 {
-	{
-		SELECT (AVG(?x2) AS ?x1 )  {
-			?x4 p:P2532 ?statement_x2.
-			?statement_x2 psv:P2532 ?value_st_x2.
-			?value_st_x2 wikibase:quantityAmount ?x2.
-			
-			?x4 wdt:P31 wd:Q63100611.
-		}
-		
-	}
-	{
-		SELECT (AVG(?x3) AS ?x0 )  {
-			?x5 p:P2532 ?statement_x3.
-			?statement_x3 psv:P2532 ?value_st_x3.
-			?value_st_x3 wikibase:quantityAmount ?x3.
-			
-			?x5 wdt:P31 wd:Q63100595.
-		}
-		
-	}
-	BIND( ((?x0 - ?x1)) AS ?x6 )
-}
-```
-
-
 
 ### add\_time(self, entity, new\_var)
 
