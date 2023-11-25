@@ -26,7 +26,7 @@ First we init a pyql object
 a=PyQL()
 ```
 
-Then we add an add\_quantity function to get the population(P1082) of Germany(Q183) in 2000. This population value will be saved in variable x0.
+Then we add an add\_quantity function to get the `population(P1082)` of `Germany(Q183)` in 2000. This population value will be saved in variable `x0`.
 
 It is corresponding to the step 1 above.
 
@@ -34,7 +34,7 @@ It is corresponding to the step 1 above.
 a.add_quantity('Q183','P1082','x0',2000)
 ```
 
-Similarly, add an add\_quantity function to get the population(P1082) of Germany(Q183) in 2010. This population value will be saved in variable x1.
+Similarly, add an add\_quantity function to get the `population(P1082)` of `Germany(Q183)` in 2010. This population value will be saved in variable `x1`.
 
 It is corresponding to the step 2 above.
 
@@ -42,7 +42,7 @@ It is corresponding to the step 2 above.
 a.add_quantity('Q183','P1082','x1',2010)
 ```
 
-Next, add a sub function within a bind function to get the population growth of Germany between 2000 and 2010. It will create a calculation of subtracting the population of Germany in 2010 (saved in variable x1) from the population of Germany in 2000 (saved in variable x0). The growth value will be saved in variable x4.
+Next, add a sub function within a bind function to get the population growth of Germany between 2000 and 2010. It will create a calculation of subtracting the population of Germany in 2010 (saved in variable `x1`) from the population of Germany in 2000 (saved in variable `x0`). The growth value will be saved in variable `x4`.
 
 It is corresponding to the step 3 above.
 
@@ -50,7 +50,7 @@ It is corresponding to the step 3 above.
 a.add_bind(sub('x1','x0'),'x4')
 ```
 
-Similarly, add three functions to get the population growth of Japan(Q17) between 2000 and 2010. The growth value will be saved in variable x5.
+Similarly, add three functions to get the population growth of `Japan(Q17)` between 2000 and 2010. The growth value will be saved in variable `x5`.
 
 It is corresponding to the step 4, step 5 and step 6 above.
 
