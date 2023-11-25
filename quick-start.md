@@ -1,6 +1,6 @@
 # Quick Start
 
-Here is an example of a simple PyQL program.
+Here is an example of constructing a PyQL program and then generating an executable SPARQL query.
 
 #### Question
 
@@ -84,5 +84,10 @@ SELECT ?answer {
 	
 	BIND( (IF(?x4 > ?x5, "TRUE", "FALSE")) AS ?answer )
 }
+```
 
+#### execution result of this query
+
+```sparql
+FALSE
 ```
