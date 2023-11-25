@@ -26,12 +26,23 @@ First we init a pyql object
 a=PyQL()
 ```
 
-Then we add an add\_quantity function
+Then we add an add\_quantity function to get the population(P1082) of Germany(Q183) in 2000.&#x20;
+
+It is corresponding to the step 1 above.
 
 ```python
-a=PyQL()
+a.add_quantity('Q183','P1082','x0',2000)
+```
+
+Similarly, add an add\_quantity function to get the population(P1082) of Germany(Q183) in 2010.&#x20;
+
+It is corresponding to the step 2 above.
+
+```python
 a.add_quantity('Q183','P1082','x0',2010)
 ```
+
+
 
 Finally we constrcut the whole query according to the step-by-step solution above
 
