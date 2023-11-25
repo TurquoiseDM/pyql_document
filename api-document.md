@@ -791,6 +791,38 @@ SELECT DISTINCT ?x0 {
 }
 ```
 
+### set\_answer
+
+> **set\_answer(self,answer='\*')**
+
+Set the return value of the final query. It can only be used at last.
+
+**Parameters:**
+
+* answer(str): The return value of this query.
+
+**example:**
+
+* Question:
+
+> What is the start time of Efficacy and Safety Study of Mongersen (GED-0301) for the Treatment of Subjects With Active Crohn's Disease?
+
+* Program:
+
+```python
+a = PyQL()
+a.add_end_time('Q64216670', 'x0')
+a.set_answer('x0')
+```
+
+* SPARQL:
+
+```sparql
+SELECT DISTINCT ?x0 {
+	wd:Q64216670 wdt:P582 ?x0.
+}
+```
+
 ## Arithmetic
 
 These functions are used inside an add\_bind. They are not member functions of PyQL class.
