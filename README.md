@@ -18,7 +18,7 @@ a.add_filter('x2','>',6000)
 # get the value of a quantity property of x1. This value will be saved in x3.
 a.add_quantity('x1','P2052','x3')
 # get the average value among all the values of variable x3. The average value will be saved in x4.
-a.add_max('x3','x4')
+a.add_avg('x3','x4')
 ```
 
 When write a PyQL, you need to first initialize a PyQL object and sequentially add functions to construct the whole query.
