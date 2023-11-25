@@ -60,7 +60,13 @@ a.add_quantity('Q17','P1082','x2',2010)
 a.add_bind(sub('x2','x3'),'x5')
 ```
 
-Finally we constrcut the whole query according to the step-by-step solution above
+Finally, add a compare function to check whether the population growth of Germany higher than the population growth of Japan. If the population growth of Germany is higher, the return value of the entire query will be 'True'. Otherwise, the return value will be 'False'.
+
+```python
+a.add_compare('x4','>','x5')
+```
+
+Ultimately, we constrcut the whole query according to the step-by-step solution above
 
 ```python
 a=PyQL()
